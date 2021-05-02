@@ -135,8 +135,8 @@ function draw() {
   Mask2();
   covid();
   }
-
-  if (score===1) {
+ 
+  if (score===5) {
     gameState=1;
     level1();
     next_level.visible = true
@@ -192,6 +192,12 @@ if(textVisible===true){
   text("Next Level",displayWidth - 140, displayHeight/9.5) 
 }
 
+if (gameState===1){
+  textSize(35)
+  fill("white");    
+  text1 = text("YOU CREATED 10 BRICKS. CREATE MORE TO MAKE A HOUSE!", 300, displayHeight/2)
+}
+
 }
 
 function Mask1() {
@@ -202,7 +208,7 @@ function Mask1() {
     mask1.velocityY = random(1,3)
     mask1.scale = 0.1;
     mask1.setCollider("circle", 0, 0, 10)
-    mask1.debug = true;
+    //mask1.debug = true;
     mask1.lifetime = 1200
     mask1Group.add(mask1)
   }
@@ -216,7 +222,7 @@ function Mask2() {
     mask2.velocityY = random(1,3)
     mask2.scale = 0.2;
     mask2.setCollider("circle", 0, 0, 20)
-    mask2.debug = true;
+    //mask2.debug = true;
     mask2.lifetime = 1200
     mask2Group.add(mask2)
   }
@@ -230,7 +236,7 @@ function covid() {
     corona.addImage("covid", coronaImage)
     corona.scale = 0.04
     corona.setCollider("circle", 0, 0, 2)
-    corona.debug = true;
+    //corona.debug = true;
     coronaGroup.add(corona);
   }
 }
@@ -249,14 +255,13 @@ function level1() {
     saviour.velocityX = 0;
     stroke("white");
     textSize(20);  
-    //fill("white");    
-    //text1 = text("YOU CREATED 10 BRICKS. CREATE 15 MORE TO MAKE A HOUSE", 400, displayHeight/2)
+    /*fill("white");    
+    text1 = text("YOU CREATED 10 BRICKS FROM THE COVID WASTAGE. CREATE 15 MORE TO MAKE A HOUSE AND REUSE THE WASTE!", 200, displayHeight/2)*/
   //  brick1Group.add(brick1);
   if(mousePressedOver(next_level)){
     gameState=2
     //brick1.visible = false
-      
-  }
+  } 
   }
 }
 
@@ -265,10 +270,10 @@ function Mask3() {
     mask3 = createSprite(random(100,displayWidth - 100), random(100, saviour.y - 20), 20,20)
     mask3.addImage(mask1Image);
     mask3.velocityX = 0;
-    mask3.velocityY = random(1,3)
+    mask3.velocityY = random(1,6)
     mask3.scale = 0.1;
     mask3.setCollider("circle", 0, 0, 10)
-    mask3.debug = true;
+    //mask3.debug = true;
     mask3.lifetime = 1200
     mask3Group.add(mask3)
   }
@@ -279,10 +284,10 @@ function Mask4() {
     mask4 = createSprite(random(100, displayWidth - 100), random(50, saviour.y - 200), 20,20)
     mask4.addImage(mask2Image);
     mask4.velocityX = 0;
-    mask4.velocityY = random(1,3)
+    mask4.velocityY = random(1,6)
     mask4.scale = 0.2;
     mask4.setCollider("circle", 0, 0, 20)
-    mask4.debug = true;
+    //mask4.debug = true;
     mask4.lifetime = 1200
     mask4Group.add(mask4)
   }
@@ -291,12 +296,12 @@ function Mask4() {
 function covid2() {
   if(frameCount%200===0) {
     corona2 = createSprite(random(100,displayWidth - 100), random(0, displayHeight - 300), 10);
-    corona2.velocityY = 3
+    corona2.velocityY = 5
     corona2.shapeColor = "white"
     corona2.addImage("covid", coronaImage)
     corona2.scale = 0.04
     corona2.setCollider("circle", 0, 0, 2)
-    corona2.debug = true;
+    //corona2.debug = true;
     corona2Group.add(corona2);
   }
 }
@@ -366,16 +371,38 @@ for(var j = 0; j < mask4Group.length; j++) {
     mask4Group.destroyEach();
   }
 
-  if (saviour.isTouching(corona2Group)) {
+  if (saviour.isTouching(corona2Group)) { 
     saviour.x = displayWidth/2;
     saviour.y = 800;
     saviour.velocityX = 0;
     saviour.velocityY = 0;
     score = 0;
   }
-  if (score===2) {
-    gameState = 3
+ /* if (score===score + 1) {
+    saviour.x = displayWidth/2;
+    saviour.y = 800;
+    if (keyDown(RIGHT_ARROW)) {
+      saviour.velocityX = 4;
+      saviour.velocityY = 0;
+    }
   
+    if (keyDown(LEFT_ARROW)) {
+      saviour.velocityX = -4;
+      saviour.velocityY = 0;
+    }
+  
+    if (keyDown(DOWN_ARROW)) {
+      saviour.scale = 0.5
+    }
+  
+    if (keyDown(UP_ARROW)) {
+      saviour.scale = 0.75
+    }
+  }*/
+
+  if (score===1) {
+    gameState = 3
+    gameOver()
   }
 
   Mask3();
